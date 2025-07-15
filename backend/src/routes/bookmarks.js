@@ -81,4 +81,20 @@ router.post('/', requireAuth, async (req, res) => {
   }
 });
 
+// Delete a bookmark
+router.delete('/:id', requireAuth, async (req, res) => {
+  try {
+    const { id } = req.params;
+    // Only allow deleting bookmarks owned by the user
+    const deleted = await Bookmark.findOneAndDelete({ _id: id, user: req.userId });
+    if (!deleted) {
+      return res.status(404).json({ error: 'Bookmark not found' });
+    }
+    res.status(204).send();
+  } catch (err) {
+    console.error('Error deleting bookmark:', err);
+    res.status(500).json({ error: 'Failed to delete bookmark' });
+  }
+});
+
 export default router;
