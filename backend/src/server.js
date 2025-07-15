@@ -27,7 +27,8 @@ app.use(cors({
   ], // Common headers
   exposedHeaders: ['Set-Cookie'], // Allow frontend to access Set-Cookie header
   optionsSuccessStatus: 200, // For legacy browser support
-  preflightContinue: false // Handle preflight requests automatically
+  preflightContinue: false, // Handle preflight requests automatically
+  sameSite:'none'
 }));
 
 

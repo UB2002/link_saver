@@ -1,4 +1,5 @@
-const API = import.meta.env.VITE_API_URL | 'https://link-saver-2qtw.onrender.com/api';
+const API = import.meta.env.VITE_API_URL;
+console.log(`api key --->${API}`)
 
 async function request(path, opts = {}) {
   
