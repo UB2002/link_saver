@@ -2,6 +2,24 @@
 
 A full-stack bookmark manager built with SvelteKit (frontend), Node.js/Express (backend), and MongoDB. Paste any URL to save its title, favicon, and auto-generated summary via Jina AI.
 
+---
+
+
+## Default User
+
+For testing/demo purposes, a default user is available:
+
+```json
+{
+  "email": "you@example.com",
+  "password": "hunter2"
+}
+```
+
+Use these credentials to log in after starting the app, or create your own account via the signup page.
+
+---
+
 ## Features
 
 * **User Authentication**: Sign-up, log-in, log-out using email & password, secured with bcrypt & JWT cookie.
@@ -9,7 +27,7 @@ A full-stack bookmark manager built with SvelteKit (frontend), Node.js/Express (
 * **Auto-Summary**: Fetch page HTML and generate a concise summary using Jina AI’s open endpoint.
 * **Responsive UI**: Built with SvelteKit, Vite, and TailwindCSS for a fast, mobile-friendly experience.
 * **CORS & Security**: Configured with strict CORS policies and HTTP-only cookies.
-
+---
 ## Tech Stack
 
 * **Frontend**
@@ -25,12 +43,7 @@ A full-stack bookmark manager built with SvelteKit (frontend), Node.js/Express (
 
   * Jina AI open endpoint
 
-## Prerequisites
-
-* Node.js v18+
-* npm or yarn
-* MongoDB instance (Atlas or local)
-* Jina AI API key
+---
 
 ## Project Setup
 
@@ -57,6 +70,8 @@ A full-stack bookmark manager built with SvelteKit (frontend), Node.js/Express (
    npm run dev
    ```
 
+---
+
 *Backend will run at `http://localhost:4000`.*
 
 ### Frontend
@@ -77,6 +92,7 @@ A full-stack bookmark manager built with SvelteKit (frontend), Node.js/Express (
    npm install
    npm run dev
    ```
+---
 
 *Frontend will run at `http://localhost:5173`.*
 
@@ -86,7 +102,7 @@ A full-stack bookmark manager built with SvelteKit (frontend), Node.js/Express (
 2. **Log In**: Visit `/login`, authenticate to receive a JWT cookie.
 3. **Save a Bookmark**: Paste any URL in the home page input and click **Save**.
 4. **View & Delete**: See your list of bookmarks with titles, favicons, and summaries. Click **Delete** to remove.
-
+---
 ## API Endpoints
 
 | Route                | Method | Description                               |
@@ -98,6 +114,8 @@ A full-stack bookmark manager built with SvelteKit (frontend), Node.js/Express (
 | `/api/bookmarks`     | POST   | Add a new bookmark with auto-summary      |
 | `/api/bookmarks/:id` | DELETE | Delete a bookmark by ID (requires auth)   |
 
+
+---
 ## Environment Variables
 
 Both backend and frontend require `.env` files:
@@ -117,4 +135,18 @@ Both backend and frontend require `.env` files:
   ```env
   VITE_API_URL=
   ```
+
+---
+
+## What I'd Do Next
+
+- Add bookmark editing and tags
+- Add user profile management
+- Improve error handling and user feedback
+- Add tests (unit/integration)
+- Add pagination or search for bookmarks
+- Polish UI/UX and add dark mode
+- Add deployment instructions for Docker
+
+
 
