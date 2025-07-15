@@ -15,7 +15,7 @@ app.use(cookieParser());
 
 
 app.use(cors({
-  origin: 'http://localhost:5173', // Your frontend URL
+  origin: ['http://localhost:5173','https://link-saver-omega.vercel.app/'], // Your frontend URL
   credentials: true, // Allow cookies to be sent
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'], // All HTTP methods
   allowedHeaders: [
