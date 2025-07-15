@@ -45,12 +45,25 @@ router.post('/', requireAuth, async (req, res) => {
       throw new Error(`Jina API error: ${summaryResp.status} ${summaryResp.statusText}`);
     }
 
-    const summaryData = await summaryResp.text(); // Reader API returns text, not JSON
-    console.log('Jina Reader API response:', summaryData);
+    const summaryData = await summaryResp.json(); // Parse as JSON
+    console.log('Jina Reader API response:', JSON.stringify(summaryData, null, 2)); // Pretty print for easier inspection
 
-    // Use the first few sentences as summary (you can customize this)
-    const sentences = summaryData.split(/[.!?]+/).filter(s => s.trim().length > 0);
-    const summary = sentences.slice(0, 3).join('. ') + (sentences.length > 3 ? '.' : '');
+    // Try to extract summary string from the response (prefer summary, then description, then a snippet from content)
+    let summary = summaryData.data?.summary;
+    if (!summary) {
+      summary = summaryData.data?.description;
+    }
+    if (!summary) {
+      // Fallback: take the first 2 sentences from content
+      const content = summaryData.data?.content;
+      if (content) {
+        const sentences = content.split(/[.!?]+/).filter(s => s.trim().length > 0);
+        summary = sentences.slice(0, 2).join('. ') + (sentences.length > 2 ? '.' : '');
+      }
+    }
+    if (!summary) {
+      summary = 'No summary available';
+    }
 
     // Save to DB
     const bm = await Bookmark.create({
@@ -58,7 +71,7 @@ router.post('/', requireAuth, async (req, res) => {
       url,
       title,
       favicon,
-      summary: summary || 'No summary available'
+      summary
     });
 
     res.status(201).json(bm);
