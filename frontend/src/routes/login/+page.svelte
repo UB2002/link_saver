@@ -24,9 +24,13 @@
       placeholder="Password"
       class="border p-2 w-full mb-4"
     />
-    <button on:click={submit} class="w-full bg-green-500 text-white p-2 rounded">
-      Log In
-    </button>
+    <button
+    on:click={submit}
+    class="w-full bg-green-500 text-white p-2 rounded shadow transition
+           hover:bg-green-600 active:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400"
+  >
+    Log In
+  </button>
     
   </div>
   <div class="text-center mt-4">
